@@ -79,7 +79,7 @@ def K_Arm_Opt(args,target_classes_all,triggered_classes_all,trigger_type,model,d
     else:
         #start_label_index = torch.randint(0,args.num_classes-1,(1,))[0].item()
         start_label_index = 0
-    print('DEBUG target_classes_all: {target_classes_all}'.format(target_classes_all))
+
     pattern, mask, l1_norm, total_times = k_arm_scanner.scanning(target_classes_all,data_loader_arr,start_label_index,pattern,mask,trigger_type,direction)
     index = torch.argmin(torch.Tensor(l1_norm))
 
