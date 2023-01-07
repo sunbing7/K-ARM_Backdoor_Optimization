@@ -24,6 +24,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='PyTorch K-ARM Backdoor Optimization')
     parser.add_argument('--device',type=int,default=0)
+    parser.add_argument('--this_device', type=str, default='cpu')
     parser.add_argument('--input_width',type=int,default=224)
     parser.add_argument('--input_height',type=int,default=224)
     parser.add_argument('--channels',type=int,default=3)
@@ -67,7 +68,8 @@ def main():
     model,num_classes = loading_models(args)
     args.num_classes = num_classes
 
-    #args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    args.this_device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print('DEBUG device available: {}'.format(args.this_device))
 
     print('='*41 + ' Arm Pre-Screening ' + '='*40)
 
