@@ -60,6 +60,11 @@ def main():
     parser.add_argument('--scratch_dirpath',type=str,default = '/scratch_dirpath/')
     parser.add_argument('--examples_dirpath',type=str,default='/data/share/trojai/trojai-round3-dataset/id-00000189/clean_example_data/')
     parser.add_argument('--model_filepath',type=str,default='/data/share/trojai/trojai-round3-dataset/id-00000189/model.pt')
+
+    parser.add_argument('--arch', type=str, default='resnet18',
+                        choices=['resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152', 'MobileNetV2',
+                                 'vgg19_bn', 'vgg11_bn'])
+
     args = parser.parse_args()
 
     args.this_device = 'cuda' if torch.cuda.is_available() else 'cpu'

@@ -1,6 +1,9 @@
 # define supporting functions
 
-import torch 
+import torch
+import models
+from models.selector import *
+from models.resnet_cifar import resnet18
 
 # print configurations
 def print_args(opt):
@@ -17,12 +20,22 @@ def print_args(opt):
 # load model on device, get number of classes
 def loading_models(args):
     device = torch.device("cuda:%d" % args.device)
-    model = torch.load(args.model_filepath)
-    model.to(device)
-    model.eval()
-    sample_input = torch.zeros(1,args.channels,args.input_width,args.input_height).to(device)
-    sample_output = model(sample_input)
-    num_classes = sample_output.size(1)
+
+    if args.arch == 'resnet18':
+        model = resnet18(num_classes=args.num_classes).to(device)
+
+        state_dict = torch.load(args.model_filepath)
+        model.eval()
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
+    else:
+
+        model = torch.load(args.model_filepath)
+        model.to(device)
+        model.eval()
+        sample_input = torch.zeros(1,args.channels,args.input_width,args.input_height).to(device)
+        sample_output = model(sample_input)
+        num_classes = sample_output.size(1)
 
     return model,num_classes
 
