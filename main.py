@@ -91,7 +91,11 @@ def main():
     else:
 
         print('='*40 + ' K-ARM Optimization ' + '='*40)
+        print('DEBUG raw_target_classes: {}'.format(raw_target_classes))
+        print('DEBUG raw_victim_classes: {}'.format(raw_victim_classes))
         print('DEBUG target_classes: {}'.format(target_classes))
+        print('DEBUG victim_classes: {}'.format(victim_classes))
+        print('DEBUG trigger_type: {}'.format(trigger_type))
         l1_norm,mask,target_class,victim_class,opt_times = K_Arm_Opt(args,target_classes,victim_classes,trigger_type,model,'forward')
         print(f'Target Class: {target_class} Victim Class: {victim_class} Trigger Size: {l1_norm} Optimization Steps: {opt_times}')
         if args.sym_check and trigger_type == 'polygon_specific':
