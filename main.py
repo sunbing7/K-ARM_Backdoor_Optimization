@@ -62,14 +62,13 @@ def main():
     parser.add_argument('--model_filepath',type=str,default='/data/share/trojai/trojai-round3-dataset/id-00000189/model.pt')
     args = parser.parse_args()
 
+    args.this_device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print('DEBUG device available: {}'.format(args.this_device))
 
     print_args(args)
     start_time = time.time()
     model,num_classes = loading_models(args)
     args.num_classes = num_classes
-
-    args.this_device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    print('DEBUG device available: {}'.format(args.this_device))
 
     print('='*41 + ' Arm Pre-Screening ' + '='*40)
 
