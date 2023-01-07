@@ -129,6 +129,7 @@ class K_Arm_Scanner:
         times = [0] * self.num_classes
         total_times = [0] * self.num_classes
         first_best_reg = [1e+10] * self.num_classes
+        print('DEBUG y_target_index:{}'.format(y_target_index))
         y_target_tensor = torch.Tensor([target_classes_all[y_target_index]]).long().to(self.device)
         
         optimizer_list = []
