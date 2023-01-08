@@ -12,8 +12,7 @@ class CustomDataSet(Dataset):
         self.main_dir = main_dir
         self.transform = transform
         all_imgs = os.listdir(main_dir)
-        print('DEBUG len(all_imgs):{}'.format(len(all_imgs)))
-        print('DEBUG all_imgs[0].shape:{}'.format(all_imgs[0].shape))
+
         if 'data.csv' in all_imgs:
             all_imgs.remove('data.csv')
         # remove all imgaes except triggered_classes!!!!!!!!
@@ -36,6 +35,6 @@ class CustomDataSet(Dataset):
     def __getitem__(self, idx):
         img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
         label = int(img_loc.split('_')[-3])
-        image = Image.open(img_loc).convert("RGB")
+        image = Image.open(img_loc)#.convert("RGB")
         tensor_image = self.transform(image)
         return tensor_image,self.total_imgs[idx],label
