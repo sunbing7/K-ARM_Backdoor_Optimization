@@ -8,9 +8,10 @@ from natsort import natsorted
 #define custom dataset for TrojAI competition
 
 class CustomDataSet(Dataset):
-    def __init__(self, main_dir, transform,triggered_classes,label_specific=False):
+    def __init__(self, main_dir, transform,triggered_classes,label_specific=False,num_ch=3):
         self.main_dir = main_dir
         self.transform = transform
+        self.num_ch = num_ch
         all_imgs = os.listdir(main_dir)
 
         if 'data.csv' in all_imgs:
@@ -35,6 +36,9 @@ class CustomDataSet(Dataset):
     def __getitem__(self, idx):
         img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
         label = int(img_loc.split('_')[-3])
-        image = Image.open(img_loc)#.convert("RGB")
+        if self.num_ch == 3:
+            image = Image.open(img_loc).convert("RGB")
+        else:
+            image = Image.open(img_loc)
         tensor_image = self.transform(image)
         return tensor_image,self.total_imgs[idx],label

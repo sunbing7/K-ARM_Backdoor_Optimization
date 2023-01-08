@@ -22,7 +22,7 @@ def Pre_Screening(args,model):
         transforms.ToTensor()
         ])
 
-    dataset = CustomDataSet(args.examples_dirpath,transform=transform,triggered_classes =[])
+    dataset = CustomDataSet(args.examples_dirpath,transform=transform,triggered_classes =[], num_ch=args.channels)
     data_loader = DataLoader(dataset=dataset,batch_size = args.batch_size,shuffle=True,drop_last=False,num_workers=2,pin_memory=True)
     acc = 0
     for idx, (img,name,label) in enumerate(data_loader):
