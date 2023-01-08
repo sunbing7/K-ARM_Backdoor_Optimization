@@ -4,6 +4,8 @@ import torch
 import models
 from models.selector import *
 from models.resnet_cifar import resnet18
+from models.vgg_cifar import vgg11_bn
+from models.mobilenetv2 import MobileNetV2
 
 # print configurations
 def print_args(opt):
@@ -21,11 +23,23 @@ def print_args(opt):
 def loading_models(args):
     device = torch.device("cuda:%d" % args.device)
 
-    if args.arch == 'resnet18':
+    if args.arch == 'resnet18': #semantic modify
         model = resnet18(num_classes=args.num_classes).to(device)
 
         state_dict = torch.load(args.model_filepath)
         model.eval()
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
+    elif args.arch == 'vgg11_bn':   #semantic modify
+        model = vgg11_bn(num_classes=args.num_classes).to(device)
+        model.eval()
+        state_dict = torch.load(args.model_filepath, map_location=device)
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
+    elif args.arch == 'MobileNetV2':    #semantic modify
+        model = MobileNetV2(num_classes=args.num_classes).to(device)
+        model.eval()
+        state_dict = torch.load(args.model_filepath, map_location=device)
         load_state_dict(model, orig_state_dict=state_dict)
         num_classes = args.num_classes
     else:
