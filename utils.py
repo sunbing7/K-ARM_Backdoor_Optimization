@@ -81,7 +81,7 @@ def classes_matching(target_classes_all,triggered_classes_all):
 
 def identify_trigger_type(raw_target_classes,raw_victim_classes):
 
-    if raw_victim_classes is not None or len(raw_victim_classes) != 0:
+    if raw_victim_classes != None:
         target_classes, victim_classes = classes_matching(raw_target_classes,raw_victim_classes)
         num_classes = len(victim_classes)
         trigger_type = 'polygon_specific'
@@ -95,7 +95,7 @@ def identify_trigger_type(raw_target_classes,raw_victim_classes):
     
     else:
         #print(raw_target_classes)
-        if raw_victim_classes is not None or len(raw_target_classes) != 0:
+        if raw_target_classes != None:
             num_classes = 1 
             target_classes = raw_target_classes.unsqueeze(0)
             victim_classes = raw_victim_classes
