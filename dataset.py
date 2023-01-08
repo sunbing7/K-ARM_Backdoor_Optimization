@@ -12,6 +12,8 @@ class CustomDataSet(Dataset):
         self.main_dir = main_dir
         self.transform = transform
         all_imgs = os.listdir(main_dir)
+        print('DEBUG len(all_imgs):{}'.format(len(all_imgs)))
+        print('DEBUG all_imgs[0].shape:{}'.format(all_imgs[0].shape))
         if 'data.csv' in all_imgs:
             all_imgs.remove('data.csv')
         # remove all imgaes except triggered_classes!!!!!!!!
