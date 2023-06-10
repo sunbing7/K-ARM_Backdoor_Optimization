@@ -79,6 +79,12 @@ def main():
 
 
     raw_target_classes, raw_victim_classes =  Pre_Screening(args,model)
+    print('DEBUG raw_target_classes: {}'.format(raw_target_classes))
+    print('DEBUG raw_victim_classes: {}'.format(raw_victim_classes))
+    if len(raw_target_classes) == 0:
+        raw_target_classes = None
+    if len(raw_victim_classes) == 0:
+        raw_victim_classes = None
     target_classes,victim_classes,num_classes,trigger_type = identify_trigger_type(raw_target_classes,raw_victim_classes)
     args.num_classes = num_classes
 
@@ -91,8 +97,6 @@ def main():
     else:
 
         print('='*40 + ' K-ARM Optimization ' + '='*40)
-        print('DEBUG raw_target_classes: {}'.format(raw_target_classes))
-        print('DEBUG raw_victim_classes: {}'.format(raw_victim_classes))
         print('DEBUG target_classes: {}'.format(target_classes))
         print('DEBUG victim_classes: {}'.format(victim_classes))
         print('DEBUG trigger_type: {}'.format(trigger_type))

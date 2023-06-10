@@ -28,7 +28,7 @@ def Pre_Screening(args,model):
     for idx, (img,name,label) in enumerate(data_loader):
         img,label = img.to(device),label.to(device)
         #img = img[:,permute,:,:]
-        print('DEBUG img shape:{}'.format(img.shape))
+        #print('DEBUG img shape:{}'.format(img.shape))
         output = model(img)
         logits = F.softmax(output,1)
         _,pred = torch.max(output,1)
