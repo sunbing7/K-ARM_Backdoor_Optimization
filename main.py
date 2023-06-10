@@ -62,8 +62,8 @@ def main():
     parser.add_argument('--model_filepath',type=str,default='/data/share/trojai/trojai-round3-dataset/id-00000189/model.pt')
 
     parser.add_argument('--arch', type=str, default='resnet18',
-                        choices=['resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152', 'MobileNetV2',
-                                 'vgg19_bn', 'vgg11_bn'])
+                        choices=['resnet18', 'resnet50', 'MobileNetV2', 'densenet', 'shufflenetv2',
+                                 'vgg19_bn', 'vgg11_bn', 'MobileNet'])
 
     args = parser.parse_args()
 

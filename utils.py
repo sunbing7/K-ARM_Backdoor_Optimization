@@ -3,9 +3,12 @@
 import torch
 import models
 from models.selector import *
-from models.resnet_cifar import resnet18
+from models.resnet_cifar import resnet18, resnet50
 from models.vgg_cifar import vgg11_bn
 from models.mobilenetv2 import MobileNetV2
+from models.mobilenet import MobileNet
+from models.densenet import densenet
+from models.shufflenetv2 import shufflenetv2
 
 # print configurations
 def print_args(opt):
@@ -30,6 +33,13 @@ def loading_models(args):
         model.eval()
         load_state_dict(model, orig_state_dict=state_dict)
         num_classes = args.num_classes
+    elif args.arch == 'resnet50': #semantic modify
+        model = resnet50(num_classes=args.num_classes).to(device)
+
+        state_dict = torch.load(args.model_filepath)
+        model.eval()
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
     elif args.arch == 'vgg11_bn':   #semantic modify
         model = vgg11_bn(num_classes=args.num_classes).to(device)
         model.eval()
@@ -42,8 +52,25 @@ def loading_models(args):
         state_dict = torch.load(args.model_filepath, map_location=device)
         load_state_dict(model, orig_state_dict=state_dict)
         num_classes = args.num_classes
+    elif args.arch == 'MobileNet':    #semantic modify
+        model = MobileNet(num_classes=args.num_classes).to(device)
+        model.eval()
+        state_dict = torch.load(args.model_filepath, map_location=device)
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
+    elif args.arch == 'densenet':    #semantic modify
+        model = densenet(num_classes=args.num_classes).to(device)
+        model.eval()
+        state_dict = torch.load(args.model_filepath, map_location=device)
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
+    elif args.arch == 'shufflenetv2':    #semantic modify
+        model = shufflenetv2(num_classes=args.num_classes).to(device)
+        model.eval()
+        state_dict = torch.load(args.model_filepath, map_location=device)
+        load_state_dict(model, orig_state_dict=state_dict)
+        num_classes = args.num_classes
     else:
-
         model = torch.load(args.model_filepath)
         model.to(device)
         model.eval()
