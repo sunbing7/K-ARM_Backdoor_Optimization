@@ -131,10 +131,7 @@ def specific_label_trigger_det(args,topk_index,topk_logit):
             if j == i:
                 tmp_2[j] = -1
             else:
-                if tmp_1.size(0) != 0:
-                    tmp_2[j] = tmp_1[tmp_1 == j].size(0) / tmp_1.size(0)
-                else:
-                    tmp_2[j] = 1
+                tmp_2[j] = tmp_1[tmp_1 == j].size(0) / tmp_1.size(0)
 
                 #if tmp_2[j]  == 1:
                 if tmp_2[j]  >= args.local_theta:
