@@ -120,6 +120,7 @@ def specific_label_trigger_det(args,topk_index,topk_logit):
     for i in range(args.num_classes):  
         #for each class, find the index of samples belongs to that class tmp_1 => index, tmp_1_logit => corresponding logit
         tmp_1 = topk_index[topk_index[:,0] == i]
+        print('[DEBUG]tmp_1:{}'.format(tmp_1))
         #print(tmp_1)
 
         tmp_1_logit = topk_logit[topk_index[:,0] == i]

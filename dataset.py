@@ -36,7 +36,7 @@ class CustomDataSet(Dataset):
 
     def __getitem__(self, idx):
         img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
-        print('[DEBUG]img_loc:{}'.format(img_loc))
+        #print('[DEBUG]img_loc:{}'.format(img_loc))
         label = int(img_loc.split('_')[-3])
         if self.num_ch == 3:
             image = Image.open(img_loc).convert("RGB")
