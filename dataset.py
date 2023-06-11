@@ -13,7 +13,7 @@ class CustomDataSet(Dataset):
         self.transform = transform
         self.num_ch = num_ch
         all_imgs = os.listdir(main_dir)
-        print('[DEBUG]all_imgs:{}'.format(all_imgs[0]))
+        #print('[DEBUG]all_imgs:{}'.format(all_imgs[0]))
 
         if 'data.csv' in all_imgs:
             all_imgs.remove('data.csv')
